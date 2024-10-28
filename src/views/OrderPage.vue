@@ -1,21 +1,16 @@
 <template>
   <ion-page>
     <ion-header>
-      <StatusBar />
+      <ion-icon src="src/assets/svg/status_bar_375_44.svg" class="w-[375px] h-[44px]" aria-hidden="true"></ion-icon>
       <ion-toolbar>
         <ion-buttons slot="start">
           <ion-menu-button color="primary"></ion-menu-button>
         </ion-buttons>
         <h1>Our Foods</h1>
         <ion-buttons slot="end">
-          <ion-button aria-label="Cart Action" size="small" shape="round"
-            ><ion-icon
-              aria-hidden="true"
-              slot="icon-only"
-              :icon="cart"
-              color="primary"
-            ></ion-icon
-          ></ion-button>
+          <ion-button aria-label="Cart Action" size="small" shape="round">
+            <ion-icon src="src/assets/svg/cart.svg" class="size-[27px]" aria-hidden="true"></ion-icon>
+          </ion-button>
         </ion-buttons>
       </ion-toolbar>
     </ion-header>
@@ -28,44 +23,23 @@
         value="try our new Beef Bibimbowl"
       ></ion-searchbar>
       <ul class="w-full my-4 gap-2 flex">
-        <li
-          v-for="category in categories"
-          class="w-full rounded-2xl bg-[#DEE2E6] px-4 py-3 text-[#6C757D] text-center text-sm font-semibold first:text-white first:bg-[--ion-color-primary]"
-          :key="category"
-        >
-          {{ category }}
-        </li>
+        <CategoriesCard
+          v-for="(category, index) in categories"
+          :label="category"
+          :key="index"
+        />
       </ul>
       <div class="grid gap-2 grid-cols-2">
-        <div v-for="product in products" :key="product.id">
-          <ion-card
-            class="px-4 py-5"
-            :class="{ 'pointers-event-none': product.id !== 1 }"
-            :router-link="`/${routes.BASE}/${JSON.stringify(product)}`"
-          >
-            <div class="h-1/2 pb-[26px]">
-              <img
-                class="object-cover aspect-square"
-                src="https://docs-demo.ionic.io/assets/madison.jpg"
-                alt="Image of Product Steak Fries Veggies"
-              />
-            </div>
-            <div class="h-1/2">
-              <div class="flex flex-col">
-                <ion-card-title class="whitespace-nowrap">{{
-                  product.name
-                }}</ion-card-title>
-                <ion-card-subtitle>{{ product.category }}</ion-card-subtitle>
-                <div class="flex justify-between items-center mt-[10px]">
-                  <h3 class="text-[--ion-color-primary]">
-                    P {{ product.price }}
-                  </h3>
-                  <Rating />
-                </div>
-              </div>
-            </div>
-          </ion-card>
-        </div>
+        <ProductCard
+          v-for="{ id, name, category, price, src } in products"
+          :router-link="`/${routes.BASE}/${JSON.stringify(Object.assign(products[0]))}`"
+          :key="id"
+          :id
+          :name
+          :category
+          :price
+          :src
+        />
       </div>
     </ion-content>
   </ion-page>
@@ -82,14 +56,11 @@ import {
   IonPage,
   IonSearchbar,
   IonToolbar,
-  IonCard,
-  IonCardSubtitle,
-  IonCardTitle,
 } from "@ionic/vue";
-import { cart, funnel } from "ionicons/icons";
+import { funnel } from "ionicons/icons";
 import { ref, reactive } from "vue";
-import StatusBar from "@/component/svg/StatusBar.vue";
-import Rating from "@/component/svg/Rating.vue";
+import ProductCard from "@/components/ui/card/ProductCard.vue";
+import CategoriesCard from "@/components/ui/card/CategoriesCard.vue";
 
 const categories = ref(["All", "Breakfast", "Chicken", "Seafood", "Dessert"]);
 const products = reactive([
@@ -99,7 +70,7 @@ const products = reactive([
     category: "Meat",
     price: 175,
     rating: 4.5,
-    img: "",
+    src: "src/assets/svg/steak_136.svg",
   },
   {
     id: 2,
@@ -107,7 +78,7 @@ const products = reactive([
     category: "Chicken",
     price: 172,
     rating: 4.5,
-    img: "",
+    src: "src/assets/svg/chicken_salad_136.svg",
   },
   {
     id: 3,
@@ -115,7 +86,7 @@ const products = reactive([
     category: "Dessert",
     price: 185,
     rating: 4.5,
-    img: "",
+    src: "src/assets/svg/sorvetes_136.svg",
   },
   {
     id: 4,
@@ -123,7 +94,7 @@ const products = reactive([
     category: "Chicken",
     price: 175,
     rating: 4.5,
-    img: "",
+    src: "src/assets/svg/fried_chicken_136.svg",
   },
   {
     id: 5,
@@ -131,7 +102,7 @@ const products = reactive([
     category: "Meat",
     price: 175,
     rating: 4.5,
-    img: "",
+    src: "src/assets/svg/steak_136.svg",
   },
   {
     id: 6,
@@ -139,7 +110,7 @@ const products = reactive([
     category: "Chicken",
     price: 172,
     rating: 4.5,
-    img: "",
+    src: "src/assets/svg/chicken_salad_136.svg",
   },
   {
     id: 7,
@@ -147,7 +118,7 @@ const products = reactive([
     category: "Dessert",
     price: 185,
     rating: 4.5,
-    img: "",
+    src: "src/assets/svg/sorvetes_136.svg",
   },
   {
     id: 8,
@@ -155,7 +126,7 @@ const products = reactive([
     category: "Chicken",
     price: 175,
     rating: 4.5,
-    img: "",
+    src: "src/assets/svg/fried_chicken_136.svg",
   },
 ]);
 const routes = reactive({
@@ -178,14 +149,5 @@ ion-searchbar {
   font-size: 1rem;
   font-weight: 400;
   line-height: 1.5rem;
-}
-
-ion-card {
-  --background: #e9ecef;
-
-  box-shadow: none;
-  border-radius: 16px;
-  height: 273px;
-  margin: 0;
 }
 </style>

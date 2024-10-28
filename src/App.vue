@@ -9,5 +9,5 @@
 
 <script setup lang="ts">
 import { IonApp, IonRouterOutlet, IonSplitPane } from "@ionic/vue";
-import NavigationMenu from "./component/NavigationMenu.vue";
+import NavigationMenu from "@/components/NavigationMenu.vue";
 </script>

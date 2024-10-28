@@ -1,7 +1,7 @@
 <template>
   <ion-page>
     <ion-header :translucent="true">
-      <StatusBar />
+      <ion-icon src="src/assets/svg/status_bar_375_44.svg" class="w-[375px] h-[44px]" aria-hidden="true"></ion-icon>
       <ion-toolbar>
         <ion-buttons slot="start">
           <ion-back-button aria-label="Back Action" text=""></ion-back-button>
@@ -28,8 +28,8 @@
         <ion-radio-group class="grid gap-2 mb-4" value="My Home Address">
           <div
             class="flex items-center gap-[10px]"
-            v-for="address in registeredAddresses"
-            :key="product.id"
+            v-for="(address, index) in registeredAddresses"
+            :key="index"
           >
             <ion-card class="w-full">
               <div class="flex justify-between items-center">
@@ -55,9 +55,7 @@
                   alt="Image of Product Steak Fries Veggies"
                 />
                 <div class="flex flex-col">
-                  <ion-card-title class="mb-2">{{
-                    product.name
-                  }}</ion-card-title>
+                  <ion-card-title class="mb-2">{{product.name}}</ion-card-title>
                   <ion-card-subtitle>1x Tomato Sauce</ion-card-subtitle>
                   <ion-card-subtitle>1x Regular Coke</ion-card-subtitle>
                   <ion-card-subtitle>1x Fried Chicken</ion-card-subtitle>
@@ -82,12 +80,13 @@
         <div class="grid gap-2 my-2">
           <h2>Payment Option</h2>
           <ion-radio-group class="grid gap-2 mb-[29px]">
-            <div v-for="payment in paymentOptions" :key="product.id">
+            <div v-for="(payment, index) in paymentOptions" :key="index">
               <ion-card class="w-full h-[80px]">
                 <div class="flex justify-between items-center mb-2">
                   <ion-card-title
                     >{{ payment.type }}
-                    <span v-if="payment?.value !== undefined && payment.value >= 0"
+                    <span
+                      v-if="payment?.value !== undefined && payment.value >= 0"
                       >({{ payment?.value ?? 0 }} points)</span
                     ></ion-card-title
                   >
@@ -149,17 +148,18 @@ import {
   IonCardTitle,
 } from "@ionic/vue";
 import { ellipsisVertical } from "ionicons/icons";
-import { ref, reactive } from "vue";
+import { reactive } from "vue";
 import { useRoute } from "vue-router";
-import StatusBar from "@/component/svg/StatusBar.vue";
 
 const route = useRoute();
-const product = (typeof route.params.product === 'string') ? JSON.parse(route.params.product) : null
+const product =
+  typeof route.params.product === "string"
+    ? JSON.parse(route.params.product)
+    : null;
 
 const routes = reactive({
   CONFIRMATION: `/confirmation`,
 });
-const modal = ref();
 const registeredAddresses = reactive([
   {
     title: "My Home Address",
@@ -193,14 +193,8 @@ const paymentOptions = reactive([
     description: "Choose paynamics services available from you",
   },
 ]);
-
-const dismiss = () => modal.value.$el.dismiss();
-
-function canDismiss(data?: any, role?: string) {
-  return role !== "gesture";
-}
 </script>
-<style>
+<style scoped>
 ion-card {
   width: 87.2%;
   height: 103px;

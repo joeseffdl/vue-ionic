@@ -1,21 +1,16 @@
 <template>
   <ion-page>
     <ion-header :translucent="true">
-      <StatusBar />
+      <ion-icon src="src/assets/svg/status_bar_375_44.svg" class="w-[375px] h-[44px]" aria-hidden="true"></ion-icon>
       <ion-toolbar>
         <ion-buttons slot="start">
           <ion-back-button aria-label="Back Action" text=""></ion-back-button>
         </ion-buttons>
         <h1>{{ product.category }}</h1>
         <ion-buttons slot="end">
-          <ion-button aria-label="Cart Action" size="small" shape="round"
-            ><ion-icon
-              aria-hidden="true"
-              slot="icon-only"
-              :icon="cart"
-              color="primary"
-            ></ion-icon
-          ></ion-button>
+          <ion-button aria-label="Cart Action" size="small" shape="round">
+            <ion-icon src="src/assets/svg/cart.svg" class="size-[27px]" aria-hidden="true"></ion-icon>
+          </ion-button>
         </ion-buttons>
       </ion-toolbar>
     </ion-header>
@@ -24,7 +19,7 @@
       <div
         class="flex items-center justify-center bg-[#E9ECEF] h-[239px] rounded-2xl relative mb-4"
       >
-        <Product1 class="w-3/4 h-[70%]" />
+        <ion-icon src="src/assets/svg/product_1.svg" class="w-3/4 h-[70%]" aria-hidden="true"></ion-icon>
         <button
           class="flex items-center justify-center pointer-events-none shadow-lg size-11 rounded-[18px] !bg-white text-[--ion-color-primary] absolute bottom-0 right-0 translate-y-1/2 -translate-x-[22px]"
           aria-label="Add to Favorites action"
@@ -38,7 +33,7 @@
         </button>
       </div>
       <span class="text-black">{{ product.name }}</span>
-      <RatingBig class="my-4" />
+      <ion-icon src="src/assets/svg/rating_87_18.svg" class="w-[87px] h-[18px] my-4" aria-hidden="true"></ion-icon>
       <p class="text-[#6C757D] mb-[25px]">
         Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere
         cubilia curae; Nam eu aliquam ipsum, sed accumsan metus. Maecenas neque
@@ -62,13 +57,12 @@
         <ion-select-option value="coke">Coke</ion-select-option>
       </ion-select>
       <ul class="w-full my-4 gap-2 flex">
-        <li
-          v-for="size in sizes"
-          class="w-full rounded-2xl bg-white px-4 py-3 text black text-center text-sm font-semibold first:text-white border-[1px] border-[#DEE2E6] first:bg-[--ion-color-tertiary]"
-          :key="size"
-        >
-          {{ size }}
-        </li>
+        <CategoriesCard
+          v-for="(size, index) in sizes"
+          :key="index"
+          :label="size"
+          variant="tertiary"
+        />
       </ul>
       <h2 class="my-2">Add-Ons</h2>
       <div class="grid gap-2 mb-4">
@@ -76,12 +70,7 @@
           <ion-card>
             <div class="grid grid-cols-3">
               <div class="flex items-center justify-center">
-                <div v-if="index === 0">
-                  <Tomato />
-                </div>
-                <div v-else>
-                  <Rice />
-                </div>
+                <ion-icon :src="`${item.src}`" class="size-[88px]" aria-hidden="true"></ion-icon>
               </div>
               <div class="col-span-2 mt-2 mr-[10px]">
                 <div class="flex justify-between">
@@ -94,7 +83,7 @@
                 <ion-card-subtitle>{{ item.category }}</ion-card-subtitle>
                 <div class="flex items-center justify-between mt-2">
                   <h3 class="text-[--ion-color-primary]">P {{ item.price }}</h3>
-                  <Counter />
+                  <ion-icon src="src/assets/svg/counter_112_32.svg" class="w-28 h-8" aria-hidden="true"></ion-icon>
                 </div>
               </div>
             </div>
@@ -126,36 +115,23 @@ import {
   IonToolbar,
   IonFooter,
 } from "@ionic/vue";
-import { cart, heartOutline } from "ionicons/icons";
+import { heartOutline } from "ionicons/icons";
 import { ref, reactive } from "vue";
 import { useRoute } from "vue-router";
-import Modal from "@/component/Modal.vue";
-import StatusBar from "@/component/svg/StatusBar.vue";
-import Product1 from "@/component/svg/Product1.vue";
-import RatingBig from "@/component/svg/RatingBig.vue";
-import Tomato from "@/component/svg/Tomato.vue";
-import Rice from "@/component/svg/Rice.vue";
-import Counter from "@/component/svg/Counter.vue";
+import Modal from "@/components/Modal.vue";
+import CategoriesCard from "@/components/ui/card/CategoriesCard.vue";
 
 const route = useRoute();
-const product = (typeof route.params.product === 'string') ? JSON.parse(route.params.product) : null
+const product =
+  typeof route.params.product === "string"
+    ? JSON.parse(route.params.product)
+    : null;
 
-const modal = ref();
 const sizes = ref(["Regular", "Large", "X-Large"]);
 const addOns = reactive([
-  { name: "Tomato Sauce", category: "Sauce", price: 49 },
-  { name: "White Rice", category: "Rice", price: 25 },
+  { name: "Tomato Sauce", category: "Sauce", price: 49, src: "src/assets/svg/tomato_sauce_78.svg" },
+  { name: "White Rice", category: "Rice", price: 25, src: "src/assets/svg/white_rice_88.svg" },
 ]);
-const routes = reactive({
-  PRODUCT: "/products",
-  CHECKOUT: `/products/${JSON.stringify(product)}/checkout`,
-});
-
-const dismiss = () => modal.value.$el.dismiss();
-
-async function canDismiss(data?: any, role?: string) {
-  return role !== "gesture";
-}
 </script>
 <style scoped>
 ion-select {

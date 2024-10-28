@@ -1,6 +1,11 @@
 <template>
   <ion-menu content-id="main-content" type="push">
-    <ion-content class="ion-padding-vertical" :fullscreen="true">
+    <ion-header>
+      <ion-toolbar color="tertiary">
+        <ion-title>Menu Content</ion-title>
+      </ion-toolbar>
+    </ion-header>
+    <ion-content class="ion-padding" :fullscreen="true">
       <ion-list>
         <div class="flex items-center gap-5 px-[17px]">
           <img
@@ -15,18 +20,14 @@
               fill="clear"
               :router-link="routes.LOYALTY_POINTS"
             >
+              <ion-icon slot="start" src="src/assets/svg/crown_48.svg" class="size-[22px]" aria-hidden="true"></ion-icon>
+              <h3 class="text-black">0 Points</h3>
               <ion-icon
-                :icon="logoIonic"
-                aria-hidden="true"
-                slot="start"
-                color="warning"
-              ></ion-icon>
-              <span class="font-semibold text-sm">0 Points</span>
-              <ion-icon
-                :icon="chevronForwardOutline"
-                aria-hidden="true"
-                slot="end"
-                color="primary"
+                  class="size-[17px]"
+                  :icon="chevronForwardOutline"
+                  aria-hidden="true"
+                  slot="end"
+                  color="primary"
               ></ion-icon>
             </ion-button>
           </ion-menu-toggle>
@@ -37,8 +38,9 @@
         </div>
         <ion-menu-toggle
           class="relative px-4"
-          :auto-hide="false"
           v-for="(p, i) in appPages"
+          :auto-hide="false"
+          :class="{ 'pointer-events-none': i > 1 }"
           :key="i"
         >
           <ion-item

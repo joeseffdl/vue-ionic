@@ -1,8 +1,8 @@
 <template>
   <ion-page>
     <ion-content class="flex flex-col items-center justify-between text-center" :fullscreen="true">
-      <ion-icon src="src/assets/svg/status_bar_375_44.svg" class="w-[375px] h-[44px]" aria-hidden="true"></ion-icon>
-      <div class="grid place-items-center mt-[12.7%]">
+    <ion-icon src="src/assets/svg/status_bar_375_44.svg" class="w-[375px] h-11" aria-hidden="true"></ion-icon>
+      <div class="grid place-items-center mt-[60px]">
         <ion-icon src="src/assets/svg/confirmation.svg" class="size-[161px]" aria-hidden="true"></ion-icon>
       </div>
       <h1 class="mt-[47px]">Order Received!</h1>

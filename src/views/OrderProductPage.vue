@@ -1,7 +1,6 @@
 <template>
   <ion-page>
     <ion-header :translucent="true">
-      <ion-icon src="src/assets/svg/status_bar_375_44.svg" class="w-[375px] h-[44px]" aria-hidden="true"></ion-icon>
       <ion-toolbar>
         <ion-buttons slot="start">
           <ion-back-button aria-label="Back Action" text=""></ion-back-button>
@@ -122,6 +121,7 @@ import Modal from "@/components/Modal.vue";
 import CategoriesCard from "@/components/ui/card/CategoriesCard.vue";
 
 const route = useRoute();
+
 const product =
   typeof route.params.product === "string"
     ? JSON.parse(route.params.product)
@@ -129,8 +129,8 @@ const product =
 
 const sizes = ref(["Regular", "Large", "X-Large"]);
 const addOns = reactive([
-  { name: "Tomato Sauce", category: "Sauce", price: 49, src: "src/assets/svg/tomato_sauce_78.svg" },
-  { name: "White Rice", category: "Rice", price: 25, src: "src/assets/svg/white_rice_88.svg" },
+  { name: "Tomato Sauce", category: "Sauce", price: 49, src: "src/assets/svg/products/tomato_sauce_78.svg" },
+  { name: "White Rice", category: "Rice", price: 25, src: "src/assets/svg/products/white_rice_88.svg" },
 ]);
 </script>
 <style scoped>

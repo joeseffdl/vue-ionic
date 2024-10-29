@@ -1,20 +1,16 @@
 <template>
   <ion-menu content-id="main-content" type="push">
-    <ion-header>
-      <ion-toolbar color="tertiary">
-        <ion-title>Menu Content</ion-title>
-      </ion-toolbar>
-    </ion-header>
     <ion-content class="ion-padding" :fullscreen="true">
       <ion-list>
-        <div class="flex items-center gap-5 px-[17px]">
-          <img
+        <div class="flex items-center gap-5 mt-10 px-[17px]">
+          <ion-icon
             class="rounded-full object-cover size-[67px]"
-            src="https://docs-demo.ionic.io/assets/madison.jpg"
+            src="src/assets/svg/menu/profile_67.svg"
             alt="Image of Chou Tzuyu as profile picture"
           />
           <ion-menu-toggle>
             <ion-button
+              class="w-[136px]"
               aria-label="Navigate Loyalty Points"
               size="small"
               fill="clear"
@@ -54,13 +50,12 @@
           >
             <ion-icon
               aria-hidden="true"
-              :ios="p.iosIcon"
-              :md="p.mdIcon"
+              :src="`${routes.ICON}/${p.icon}`"
             ></ion-icon>
             <p class="text-sm font-bold pl-5">{{ p.title }}</p>
             <ion-badge
               slot="end"
-              class="rounded-full size-[19px] text-[10px] font-medium"
+              class="rounded-full text-[10px] font-medium"
               v-if="p.quantity"
               color="tertiary"
               >{{ p.quantity }}</ion-badge
@@ -69,7 +64,7 @@
         </ion-menu-toggle>
       </ion-list>
       <ion-button
-        class="grid place-items-center w-40 text-sm font-bold px-4 rounded-2xl h-11 bg-[--ion-color-primary] text-white capitalize mx-4"
+        class="grid place-items-center w-40 px-4 rounded-2xl h-11"
         >Logout</ion-button
       >
     </ion-content>
@@ -87,103 +82,74 @@ import {
   IonMenuToggle,
 } from "@ionic/vue";
 import { ref, reactive } from "vue";
-import {
-  storefrontOutline,
-  storefrontSharp,
-  alertCircleOutline,
-  alertCircleSharp,
-  cartOutline,
-  cartSharp,
-  mailOutline,
-  mailSharp,
-  fastFoodOutline,
-  fastFoodSharp,
-  helpOutline,
-  helpSharp,
-  personOutline,
-  personSharp,
-  pinOutline,
-  pinSharp,
-  trailSignOutline,
-  trailSignSharp,
-  chevronForwardOutline,
-  logoIonic,
-} from "ionicons/icons";
+import { chevronForwardOutline } from "ionicons/icons";
 
 const selectedIndex = ref(0);
 const routes = reactive({
   DASHBOARD: "/dashboard",
   ORDER: "/products",
   LOYALTY_POINTS: "/loyalty-points",
+  ICON: "src/assets/svg/menu",
 });
 const appPages = reactive([
   {
     title: "Home",
     url: routes.DASHBOARD,
-    iosIcon: mailOutline,
-    mdIcon: mailSharp,
+    icon: 'logo_20_22.svg'
   },
   {
     title: "Order Now!",
     url: routes.ORDER,
-    iosIcon: fastFoodOutline,
-    mdIcon: fastFoodSharp,
+    icon: 'chicken_16.svg'
   },
   {
     title: "Notifications",
     url: "/notifications",
-    iosIcon: alertCircleOutline,
-    mdIcon: alertCircleSharp,
+    icon: 'bell_16.svg',
     quantity: 4,
     disabled: true,
   },
   {
     title: "Store Locator",
     url: "/store-locator",
-    iosIcon: storefrontOutline,
-    mdIcon: storefrontSharp,
+    icon: 'store_18.svg',
     disabled: true,
   },
   {
     title: `FAQ's`,
     url: "/faq",
-    iosIcon: helpOutline,
-    mdIcon: helpSharp,
+    icon: 'faq_19.svg',
     disabled: true,
   },
   {
     title: `My Orders`,
     url: "/my-orders",
-    iosIcon: cartOutline,
-    mdIcon: cartSharp,
+    icon: 'bag_18.svg',
+    quantity: 2,
     disabled: true,
   },
   {
     title: `My Account`,
     url: "/my-account",
-    iosIcon: personOutline,
-    mdIcon: personSharp,
+    icon: 'account_22.svg',
     disabled: true,
   },
   {
     title: `My Favorites`,
     url: "/my-favorites",
-    iosIcon: helpOutline,
-    mdIcon: helpSharp,
+    icon: 'favorite_16.svg',
     disabled: true,
   },
   {
     title: `Order Tracker`,
     url: "/order-tracker",
-    iosIcon: pinOutline,
-    mdIcon: pinSharp,
+    icon: 'tracker_20.svg',
     disabled: true,
   },
   {
     title: `Order History`,
     url: "/order-history",
-    iosIcon: trailSignOutline,
-    mdIcon: trailSignSharp,
+    icon: 'history_16.svg',
     disabled: true,
   },
 ]);
@@ -195,14 +161,4 @@ if (path !== undefined) {
   );
 }
 </script>
-<style scoped>
-ion-button {
-  width: 136px;
-  height: 26px;
-  box-shadow: none;
-  --background: transparent;
-}
-ion-content {
-  padding: 52px 0;
-}
-</style>
+

@@ -1,7 +1,6 @@
 <template>
   <ion-page>
     <ion-header :translucent="true">
-      <ion-icon src="src/assets/svg/status_bar_375_44.svg" class="w-[375px] h-[44px]" aria-hidden="true"></ion-icon>
       <ion-toolbar>
         <ion-buttons slot="start">
           <ion-menu-button src="src/assets/svg/menu.svg" color="primary"></ion-menu-button>
@@ -53,7 +52,7 @@
           <CategoriesCard v-for="(tier, index) in tiers" :key="index" :label="tier" />
         </ul>
         <ion-card class="h-[100px] w-[343px] flex items-center mx-0 px-4 shadow-none rounded-2xl bg-[#E9ECEF]">
-          <ion-icon src="src/assets/svg/steak_86.svg" class="size-[86px]" aria-hidden="true"></ion-icon>
+          <ion-icon src="src/assets/svg/products/steak_86.svg" class="size-[86px]" aria-hidden="true"></ion-icon>
           <div class="flex flex-col size-full">
             <div class="mt-[14px]">
               <ion-card-title class="text-sm font-bold">Steak Fries Veggies</ion-card-title>

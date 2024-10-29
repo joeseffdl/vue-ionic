@@ -4,7 +4,15 @@ import { RouteRecordRaw } from "vue-router";
 const routes: Array<RouteRecordRaw> = [
   {
     path: "",
-    redirect: "/products",
+    redirect: "/initial",
+  },
+  {
+    path: "/initial",
+    component: () => import("@/views/InitialLoadPage.vue")
+  },
+  {
+    path: "/login",
+    component: () => import("@/views/LoginPage.vue")
   },
   {
     path: "/dashboard",

@@ -1,7 +1,6 @@
 <template>
   <ion-page>
     <ion-header :translucent="true">
-      <ion-icon src="src/assets/svg/status_bar_375_44.svg" class="w-[375px] h-[44px]" aria-hidden="true"></ion-icon>
       <ion-toolbar>
         <ion-buttons slot="start">
           <ion-back-button aria-label="Back Action" text=""></ion-back-button>

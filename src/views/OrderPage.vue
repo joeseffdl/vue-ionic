@@ -1,7 +1,6 @@
 <template>
   <ion-page>
     <ion-header>
-      <ion-icon src="src/assets/svg/status_bar_375_44.svg" class="w-[375px] h-[44px]" aria-hidden="true"></ion-icon>
       <ion-toolbar>
         <ion-buttons slot="start">
           <ion-menu-button color="primary"></ion-menu-button>
@@ -40,6 +39,15 @@
           :price
           :src
         />
+        <ProductCard
+            v-for="{ id, name, category, price, src } in products"
+            :key="id"
+            :id
+            :name
+            :category
+            :price
+            :src
+        />
       </div>
     </ion-content>
   </ion-page>
@@ -70,7 +78,7 @@ const products = reactive([
     category: "Meat",
     price: 175,
     rating: 4.5,
-    src: "src/assets/svg/steak_136.svg",
+    src: "steak_136.svg",
   },
   {
     id: 2,
@@ -78,7 +86,7 @@ const products = reactive([
     category: "Chicken",
     price: 172,
     rating: 4.5,
-    src: "src/assets/svg/chicken_salad_136.svg",
+    src: "chicken_salad_136.svg",
   },
   {
     id: 3,
@@ -86,7 +94,7 @@ const products = reactive([
     category: "Dessert",
     price: 185,
     rating: 4.5,
-    src: "src/assets/svg/sorvetes_136.svg",
+    src: "sorvetes_136.svg",
   },
   {
     id: 4,
@@ -94,39 +102,7 @@ const products = reactive([
     category: "Chicken",
     price: 175,
     rating: 4.5,
-    src: "src/assets/svg/fried_chicken_136.svg",
-  },
-  {
-    id: 5,
-    name: "Steak Fries Veggies",
-    category: "Meat",
-    price: 175,
-    rating: 4.5,
-    src: "src/assets/svg/steak_136.svg",
-  },
-  {
-    id: 6,
-    name: "Chicken Salad",
-    category: "Chicken",
-    price: 172,
-    rating: 4.5,
-    src: "src/assets/svg/chicken_salad_136.svg",
-  },
-  {
-    id: 7,
-    name: "Sorvetes Primavera ..",
-    category: "Dessert",
-    price: 185,
-    rating: 4.5,
-    src: "src/assets/svg/sorvetes_136.svg",
-  },
-  {
-    id: 8,
-    name: "Fried Chicken",
-    category: "Chicken",
-    price: 175,
-    rating: 4.5,
-    src: "src/assets/svg/fried_chicken_136.svg",
+    src: "fried_chicken_136.svg",
   },
 ]);
 const routes = reactive({

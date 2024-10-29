@@ -3,7 +3,7 @@
     <div class="h-1/2 pb-[26px]">
       <ion-icon
         class="object-cover size-[136px]"
-        :src="src"
+        :src="`src/assets/svg/products/${src}`"
         :alt="`Image of ${name}`"
       />
     </div>

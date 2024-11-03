@@ -5,10 +5,14 @@
         <ion-buttons slot="start">
           <ion-back-button aria-label="Back Action" text=""></ion-back-button>
         </ion-buttons>
-        <h1>{{ product.category }}</h1>
+        <h1>{{ currentProduct?.category ?? "Product Category" }}</h1>
         <ion-buttons slot="end">
           <ion-button aria-label="Cart Action" size="small" shape="round">
-            <ion-icon src="src/assets/svg/cart.svg" class="size-[27px]" aria-hidden="true"></ion-icon>
+            <ion-icon
+              src="src/assets/svg/cart.svg"
+              class="size-[27px]"
+              aria-hidden="true"
+            ></ion-icon>
           </ion-button>
         </ion-buttons>
       </ion-toolbar>
@@ -18,7 +22,11 @@
       <div
         class="flex items-center justify-center bg-[#E9ECEF] h-[239px] rounded-2xl relative mb-4"
       >
-        <ion-icon src="src/assets/svg/product_1.svg" class="w-3/4 h-[70%]" aria-hidden="true"></ion-icon>
+        <ion-icon
+          src="src/assets/svg/product_1.svg"
+          class="w-3/4 h-[70%]"
+          aria-hidden="true"
+        ></ion-icon>
         <button
           class="flex items-center justify-center pointer-events-none shadow-lg size-11 rounded-[18px] !bg-white text-[--ion-color-primary] absolute bottom-0 right-0 translate-y-1/2 -translate-x-[22px]"
           aria-label="Add to Favorites action"
@@ -31,8 +39,12 @@
           ></ion-icon>
         </button>
       </div>
-      <span class="text-black">{{ product.name }}</span>
-      <ion-icon src="src/assets/svg/rating_87_18.svg" class="w-[87px] h-[18px] my-4" aria-hidden="true"></ion-icon>
+      <span class="text-black">{{ currentProduct?.name ?? "Product Name" }}</span>
+      <ion-icon
+        src="src/assets/svg/rating_87_18.svg"
+        class="w-[87px] h-[18px] my-4"
+        aria-hidden="true"
+      ></ion-icon>
       <p class="text-[#6C757D] mb-[25px]">
         Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere
         cubilia curae; Nam eu aliquam ipsum, sed accumsan metus. Maecenas neque
@@ -69,7 +81,11 @@
           <ion-card>
             <div class="grid grid-cols-3">
               <div class="flex items-center justify-center">
-                <ion-icon :src="`${item.src}`" class="size-[88px]" aria-hidden="true"></ion-icon>
+                <ion-icon
+                  :src="`${item.src}`"
+                  class="size-[88px]"
+                  aria-hidden="true"
+                ></ion-icon>
               </div>
               <div class="col-span-2 mt-2 mr-[10px]">
                 <div class="flex justify-between">
@@ -82,7 +98,11 @@
                 <ion-card-subtitle>{{ item.category }}</ion-card-subtitle>
                 <div class="flex items-center justify-between mt-2">
                   <h3 class="text-[--ion-color-primary]">P {{ item.price }}</h3>
-                  <ion-icon src="src/assets/svg/counter_112_32.svg" class="w-28 h-8" aria-hidden="true"></ion-icon>
+                  <ion-icon
+                    src="src/assets/svg/counter_112_32.svg"
+                    class="w-28 h-8"
+                    aria-hidden="true"
+                  ></ion-icon>
                 </div>
               </div>
             </div>
@@ -115,23 +135,31 @@ import {
   IonFooter,
 } from "@ionic/vue";
 import { heartOutline } from "ionicons/icons";
-import { ref, reactive } from "vue";
-import { useRoute } from "vue-router";
+import { ref, reactive, computed, defineProps } from "vue";
 import Modal from "@/components/Modal.vue";
 import CategoriesCard from "@/components/ui/card/CategoriesCard.vue";
+import store from "@/store";
 
-const route = useRoute();
-
-const product =
-  typeof route.params.product === "string"
-    ? JSON.parse(route.params.product)
-    : null;
+const props = defineProps<{ slug: string }>();
 
 const sizes = ref(["Regular", "Large", "X-Large"]);
 const addOns = reactive([
-  { name: "Tomato Sauce", category: "Sauce", price: 49, src: "src/assets/svg/products/tomato_sauce_78.svg" },
-  { name: "White Rice", category: "Rice", price: 25, src: "src/assets/svg/products/white_rice_88.svg" },
+  {
+    name: "Tomato Sauce",
+    category: "Sauce",
+    price: 49,
+    src: "src/assets/svg/products/tomato_sauce_78.svg",
+  },
+  {
+    name: "White Rice",
+    category: "Rice",
+    price: 25,
+    src: "src/assets/svg/products/white_rice_88.svg",
+  },
 ]);
+const currentProduct = computed(() =>
+  store.products.find((product) => product.slug === props.slug) ?? { name: '', category: '' }
+);
 </script>
 <style scoped>
 ion-select {

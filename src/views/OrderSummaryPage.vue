@@ -13,10 +13,10 @@
       <div class="grid gap-2">
         <div class="flex gap-[10px] items-center">
           <ion-card class="w-full">
-            <ion-card-title>Chou Tzuyu</ion-card-title>
+            <ion-card-title>{{ currentUser.name }}</ion-card-title>
             <ion-card-content class="px-0">
-              <p>+63 912 345 6789</p>
-              <p>chou.tzu-yu@email.com</p>
+              <p>{{ currentUser.contact_number }}</p>
+              <p>{{ currentUser.email }}</p>
             </ion-card-content>
           </ion-card>
           <ion-icon
@@ -51,10 +51,10 @@
                 <img
                   class="object-cover h-[45px] w-[67px]"
                   src="https://docs-demo.ionic.io/assets/madison.jpg"
-                  alt="Image of Product Steak Fries Veggies"
+                  alt="Image of Madison"
                 />
                 <div class="flex flex-col">
-                  <ion-card-title class="mb-2">{{product.name}}</ion-card-title>
+                  <ion-card-title class="mb-2">{{ currentProduct?.name ?? "Product Name" }}</ion-card-title>
                   <ion-card-subtitle>1x Tomato Sauce</ion-card-subtitle>
                   <ion-card-subtitle>1x Regular Coke</ion-card-subtitle>
                   <ion-card-subtitle>1x Fried Chicken</ion-card-subtitle>
@@ -147,51 +147,21 @@ import {
   IonCardTitle,
 } from "@ionic/vue";
 import { ellipsisVertical } from "ionicons/icons";
-import { reactive } from "vue";
-import { useRoute } from "vue-router";
+import { reactive, computed, defineProps } from "vue";
+import store from "@/store";
 
-const route = useRoute();
-const product =
-  typeof route.params.product === "string"
-    ? JSON.parse(route.params.product)
-    : null;
+const props = defineProps<{ slug: string }>();
 
 const routes = reactive({
   CONFIRMATION: `/confirmation`,
 });
-const registeredAddresses = reactive([
-  {
-    title: "My Home Address",
-    text: "No. 21 St. Agustin Street, Brgy. De Jose Delgado City 2234 Philippines",
-    active: true,
-  },
-  {
-    title: "Work/Office",
-    text: "3rd flr Anyeong, Bldg. Seareal St. Joaqin City 3456 Philippines",
-  },
-]);
-const paymentOptions = reactive([
-  {
-    type: "Cash on Delivery",
-    description: "Pay when you received the order",
-    active: true,
-  },
-  {
-    type: "Loyalty Points",
-    description: "Pay using you earned loyalty points",
-    value: 0,
-  },
-  {
-    type: "PayPal",
-    logo: "",
-    description: "A new tab will open to access you account",
-  },
-  {
-    type: "paynamics",
-    logo: "",
-    description: "Choose paynamics services available from you",
-  },
-]);
+const currentUser = reactive(store.users[0]);
+const registeredAddresses = reactive(currentUser.addresses);
+const paymentOptions = reactive(store.paymentOptions);
+
+const currentProduct = computed(() =>
+  store.products.find((product) => product.slug === props.slug) ?? { name: '' }
+);
 </script>
 <style scoped>
 ion-card {

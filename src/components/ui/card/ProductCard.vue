@@ -13,7 +13,11 @@
         <ion-card-subtitle>{{ category }}</ion-card-subtitle>
         <div class="flex justify-between items-center mt-[10px]">
           <h3 class="text-[--ion-color-primary]">P {{ price }}</h3>
-          <ion-icon src="src/assets/svg/rating_60_12.svg" class="w-[60px] h-3" aria-hidden="true"></ion-icon>
+          <ion-icon
+            src="src/assets/svg/rating_60_12.svg"
+            class="w-[60px] h-3"
+            aria-hidden="true"
+          ></ion-icon>
         </div>
       </div>
     </div>

@@ -16,21 +16,26 @@
               fill="clear"
               :router-link="routes.LOYALTY_POINTS"
             >
-              <ion-icon slot="start" src="src/assets/svg/crown_48.svg" class="size-[22px]" aria-hidden="true"></ion-icon>
+              <ion-icon
+                slot="start"
+                src="src/assets/svg/crown_48.svg"
+                class="size-[22px]"
+                aria-hidden="true"
+              ></ion-icon>
               <h3 class="text-black">0 Points</h3>
               <ion-icon
-                  class="size-[17px]"
-                  :icon="chevronForwardOutline"
-                  aria-hidden="true"
-                  slot="end"
-                  color="primary"
+                class="size-[17px]"
+                :icon="chevronForwardOutline"
+                aria-hidden="true"
+                slot="end"
+                color="primary"
               ></ion-icon>
             </ion-button>
           </ion-menu-toggle>
         </div>
         <div class="px-4">
-          <h1 class="font-bold text-2xl">Chou Tyuzu</h1>
-          <p class="text-sm text-[#6C757D]">+63 912 345 6789</p>
+          <h1 class="font-bold text-2xl">{{ currentUser.name }}</h1>
+          <p class="text-sm text-[#6C757D]">{{ currentUser.contact_number }}</p>
         </div>
         <ion-menu-toggle
           class="relative px-4"
@@ -63,8 +68,7 @@
           </ion-item>
         </ion-menu-toggle>
       </ion-list>
-      <ion-button
-        class="grid place-items-center w-40 px-4 rounded-2xl h-11"
+      <ion-button class="grid place-items-center w-40 px-4 rounded-2xl h-11"
         >Logout</ion-button
       >
     </ion-content>
@@ -83,8 +87,10 @@ import {
 } from "@ionic/vue";
 import { ref, reactive } from "vue";
 import { chevronForwardOutline } from "ionicons/icons";
+import store from "@/store";
 
 const selectedIndex = ref(0);
+const currentUser = reactive(store.users[0]);
 const routes = reactive({
   DASHBOARD: "/dashboard",
   ORDER: "/products",
@@ -95,61 +101,61 @@ const appPages = reactive([
   {
     title: "Home",
     url: routes.DASHBOARD,
-    icon: 'logo_20_22.svg'
+    icon: "logo_20_22.svg",
   },
   {
     title: "Order Now!",
     url: routes.ORDER,
-    icon: 'chicken_16.svg'
+    icon: "chicken_16.svg",
   },
   {
     title: "Notifications",
     url: "/notifications",
-    icon: 'bell_16.svg',
+    icon: "bell_16.svg",
     quantity: 4,
     disabled: true,
   },
   {
     title: "Store Locator",
     url: "/store-locator",
-    icon: 'store_18.svg',
+    icon: "store_18.svg",
     disabled: true,
   },
   {
     title: `FAQ's`,
     url: "/faq",
-    icon: 'faq_19.svg',
+    icon: "faq_19.svg",
     disabled: true,
   },
   {
     title: `My Orders`,
     url: "/my-orders",
-    icon: 'bag_18.svg',
+    icon: "bag_18.svg",
     quantity: 2,
     disabled: true,
   },
   {
     title: `My Account`,
     url: "/my-account",
-    icon: 'account_22.svg',
+    icon: "account_22.svg",
     disabled: true,
   },
   {
     title: `My Favorites`,
     url: "/my-favorites",
-    icon: 'favorite_16.svg',
+    icon: "favorite_16.svg",
     disabled: true,
   },
   {
     title: `Order Tracker`,
     url: "/order-tracker",
-    icon: 'tracker_20.svg',
+    icon: "tracker_20.svg",
     disabled: true,
   },
   {
     title: `Order History`,
     url: "/order-history",
-    icon: 'history_16.svg',
+    icon: "history_16.svg",
     disabled: true,
   },
 ]);
@@ -161,4 +167,3 @@ if (path !== undefined) {
   );
 }
 </script>
-

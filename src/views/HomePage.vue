@@ -6,8 +6,16 @@
           <ion-menu-button color="primary"></ion-menu-button>
         </ion-buttons>
         <div>
-          <ion-button class="flex items-center pointer-events-none" fill="clear">
-            <ion-icon slot="start" src="src/assets/svg/crown_48.svg" class="size-[22px]" aria-hidden="true"></ion-icon>
+          <ion-button
+            class="flex items-center pointer-events-none"
+            fill="clear"
+          >
+            <ion-icon
+              slot="start"
+              src="src/assets/svg/crown_48.svg"
+              class="size-[22px]"
+              aria-hidden="true"
+            ></ion-icon>
             <h3 class="text-black">0 Points</h3>
             <ion-icon
               class="size-[17px]"
@@ -20,7 +28,11 @@
         </div>
         <ion-buttons slot="end">
           <ion-button>
-            <ion-icon src="src/assets/svg/menu/profile_37.svg" class="size-[37px]" aria-hidden="true"></ion-icon>
+            <ion-icon
+              src="src/assets/svg/menu/profile_37.svg"
+              class="size-[37px]"
+              aria-hidden="true"
+            ></ion-icon>
           </ion-button>
         </ion-buttons>
       </ion-toolbar>
@@ -28,13 +40,20 @@
 
     <ion-content :fullscreen="true" class="ion-padding">
       <div class="flex gap-2 mt-7 mb-[22px] items-center">
-        <ion-icon src="src/assets/svg/logo_67_72.svg" class="w-[67px] h-[72px]" aria-hidden="true"></ion-icon>
+        <ion-icon
+          src="src/assets/svg/logo_67_72.svg"
+          class="w-[67px] h-[72px]"
+          aria-hidden="true"
+        ></ion-icon>
         <div>
           <p>Anneoyong, Chou!</p>
           <h1>What do you want to eat?</h1>
         </div>
       </div>
-      <ion-searchbar class="pointer-events-none pa-[18px]" value="try our new Steak Fries Veggies"></ion-searchbar>
+      <ion-searchbar
+        class="pointer-events-none pa-[18px]"
+        value="try our new Steak Fries Veggies"
+      ></ion-searchbar>
       <section class="mt-5 grid gap-2">
         <div class="flex items-center justify-between">
           <h2>Special Offers!</h2>
@@ -61,12 +80,7 @@
           </li>
         </ul>
       </section>
-      <SectionCard
-        heading="Category"
-        :quantity="2"
-        width="200"
-        height="300"
-      />
+      <SectionCard heading="Category" :quantity="2" width="200" height="300" />
       <SectionCard heading="What's New?" :quantity="1" height="200.5" />
       <section class="mt-6 grid">
         <h2>Most Popular</h2>
@@ -113,41 +127,9 @@ import {
 import { chevronForwardOutline } from "ionicons/icons";
 import ProductCard from "@/components/ui/card/ProductCard.vue";
 import SectionCard from "@/components/ui/card/SectionCard.vue";
+import store from "@/store";
 
-const products = reactive([
-  {
-    id: 1,
-    name: "Steak Fries Veggies",
-    category: "Meat",
-    price: 175,
-    rating: 4.5,
-    src: "steak_136.svg",
-  },
-  {
-    id: 2,
-    name: "Chicken Salad",
-    category: "Chicken",
-    price: 172,
-    rating: 4.5,
-    src: "chicken_salad_136.svg",
-  },
-  {
-    id: 3,
-    name: "Sorvetes Primavera ..",
-    category: "Dessert",
-    price: 185,
-    rating: 4.5,
-    src: "sorvetes_136.svg",
-  },
-  {
-    id: 4,
-    name: "Fried Chicken",
-    category: "Chicken",
-    price: 175,
-    rating: 4.5,
-    src: "fried_chicken_136.svg",
-  },
-]);
+const products = reactive(store.products);
 const routes = reactive({
   ORDER_PAGE: "/products",
 });

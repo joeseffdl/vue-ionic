@@ -8,7 +8,11 @@
         <h1>Our Foods</h1>
         <ion-buttons slot="end">
           <ion-button aria-label="Cart Action" size="small" shape="round">
-            <ion-icon src="src/assets/svg/cart.svg" class="size-[27px]" aria-hidden="true"></ion-icon>
+            <ion-icon
+              src="src/assets/svg/cart.svg"
+              class="size-[27px]"
+              aria-hidden="true"
+            ></ion-icon>
           </ion-button>
         </ion-buttons>
       </ion-toolbar>
@@ -30,8 +34,8 @@
       </ul>
       <div class="grid gap-2 grid-cols-2">
         <ProductCard
-          v-for="{ id, name, category, price, src } in products"
-          :router-link="`/${routes.BASE}/${JSON.stringify(Object.assign(products[0]))}`"
+          v-for="{ id, name, slug, category, price, src } in products"
+          :router-link="`/${routes.BASE}/${slug}`"
           :key="id"
           :id
           :name
@@ -40,13 +44,13 @@
           :src
         />
         <ProductCard
-            v-for="{ id, name, category, price, src } in products"
-            :key="id"
-            :id
-            :name
-            :category
-            :price
-            :src
+          v-for="{ id, name, category, price, src } in products"
+          :key="id"
+          :id
+          :name
+          :category
+          :price
+          :src
         />
       </div>
     </ion-content>
@@ -67,44 +71,12 @@ import {
 } from "@ionic/vue";
 import { funnel } from "ionicons/icons";
 import { ref, reactive } from "vue";
+import store from "@/store";
 import ProductCard from "@/components/ui/card/ProductCard.vue";
 import CategoriesCard from "@/components/ui/card/CategoriesCard.vue";
 
 const categories = ref(["All", "Breakfast", "Chicken", "Seafood", "Dessert"]);
-const products = reactive([
-  {
-    id: 1,
-    name: "Steak Fries Veggies",
-    category: "Meat",
-    price: 175,
-    rating: 4.5,
-    src: "steak_136.svg",
-  },
-  {
-    id: 2,
-    name: "Chicken Salad",
-    category: "Chicken",
-    price: 172,
-    rating: 4.5,
-    src: "chicken_salad_136.svg",
-  },
-  {
-    id: 3,
-    name: "Sorvetes Primavera ..",
-    category: "Dessert",
-    price: 185,
-    rating: 4.5,
-    src: "sorvetes_136.svg",
-  },
-  {
-    id: 4,
-    name: "Fried Chicken",
-    category: "Chicken",
-    price: 175,
-    rating: 4.5,
-    src: "fried_chicken_136.svg",
-  },
-]);
+const products = reactive(store.products);
 const routes = reactive({
   BASE: "products",
 });

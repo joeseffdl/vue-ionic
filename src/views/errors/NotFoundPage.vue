@@ -1,0 +1,8 @@
+<template>
+  <section class="size-full grid place-items-center">
+    <div class="text-center">
+      <h1>404</h1>
+      <p>Page Not Found!</p>
+    </div>
+  </section>
+</template>
